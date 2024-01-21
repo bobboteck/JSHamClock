@@ -6,8 +6,24 @@ document.getElementById("callsignInput").value = currentCallSign;
 const locator = localStorage.getItem("locator");
 document.getElementById("displayLocator").innerHTML = locator;
 document.getElementById("locatorInput").value = locator;
+// Latitude
+const latitude = localStorage.getItem("latitude") === null ? 12.49 : localStorage.getItem("latitude");
+document.getElementById("latitudeInput").value = latitude;
+// Longitude - longitudeInput
+const longitude = localStorage.getItem("longitude") === null ? 41.88 : localStorage.getItem("longitude");
+document.getElementById("longitudeInput").value = longitude;
 
 
+let map = L.map('mapContainer').setView([longitude, latitude], 2);
+let Stamen_Terrain = L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', 
+{
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    subdomains: 'abcd',
+    minZoom: 0,
+    maxZoom: 10,
+    ext: 'png'
+}).addTo(map);
+let myPosition = L.marker([longitude, latitude]).addTo(map);
 
 
 
