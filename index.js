@@ -1,3 +1,5 @@
+const potaIcon = L.icon({ iconUrl: 'images/marker-pota.png', iconSize: [26,41], iconAnchor: [12,40], popupAnchor: [0,-30] });
+
 // Callsign
 const currentCallSign = localStorage.getItem("callSign");
 document.getElementById("displayCallSign").innerHTML = currentCallSign;
@@ -9,11 +11,11 @@ document.getElementById("locatorInput").value = locator;
 // Latitude
 const latitude = localStorage.getItem("latitude") === null ? 12.49 : localStorage.getItem("latitude");
 document.getElementById("latitudeInput").value = latitude;
-// Longitude - longitudeInput
+// Longitude
 const longitude = localStorage.getItem("longitude") === null ? 41.88 : localStorage.getItem("longitude");
 document.getElementById("longitudeInput").value = longitude;
 
-
+// Map
 let map = L.map('mapContainer').setView([longitude, latitude], 2);
 let Stamen_Terrain = L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', 
 {
@@ -23,10 +25,10 @@ let Stamen_Terrain = L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png'
     maxZoom: 10,
     ext: 'png'
 }).addTo(map);
-let myPosition = L.marker([longitude, latitude]).addTo(map);
+let myPosition = L.marker([longitude, latitude]).addTo(map).bindPopup(currentCallSign);
 
 
-
+// POTA Spots
 let spotList = "<ul class='list-group'>";
 
 fetch('https://api.pota.app/spot/activator')
@@ -43,6 +45,9 @@ fetch('https://api.pota.app/spot/activator')
         if(index < 5)
         {
             spotList += "<li class='list-group-item'>" + spot.activator + " Freq: " + spot.frequency + " [" + spot.mode + "] Ref: " + spot.reference + "</li>";
+            // Add POTA marker on map
+            L.marker([spot.latitude, spot.longitude], {icon: potaIcon}).addTo(map).bindPopup(spot.activator);
+
             index++;
         }
     });
