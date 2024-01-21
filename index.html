@@ -19,7 +19,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-start">
                                         <div class="col">
-                                            <h1 class="card-title" id="displyCallSign"></h1>
+                                            <h1 class="card-title" id="displayCallSign"></h1>
                                         </div>
                                         <div class="col">
                                             <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#stationSettings">
@@ -27,7 +27,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <h6 class="card-subtitle mb-2 text-body-secondary">JN61gw</h6>
+                                    <h6 class="card-subtitle mb-2 text-body-secondary" id="displayLocator"></h6>
                                     <h1>18:14:22</h1>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Station settings -->
     <div class="modal fade" id="stationSettings" tabindex="-1" aria-labelledby="stationSettingsLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
@@ -73,10 +73,14 @@
                     <label for="callsignInput" class="form-label">Call sign</label>
                     <input type="text" class="form-control" id="callsignInput" placeholder="Enter your call sign ...">
                 </div>
+                <div class="mb-3">
+                    <label for="locatorInput" class="form-label">Locator</label>
+                    <input type="text" class="form-control" id="locatorInput" placeholder="Enter your locator ...">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="saveStatioSettings()">Save changes</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="saveStationSettings()">Save changes</button>
             </div>
         </div>
         </div>

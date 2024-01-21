@@ -1,7 +1,14 @@
+// Callsign
 const currentCallSign = localStorage.getItem("callSign");
-document.getElementById("displyCallSign").innerHTML = currentCallSign;
-//callsignInput
+document.getElementById("displayCallSign").innerHTML = currentCallSign;
 document.getElementById("callsignInput").value = currentCallSign;
+// Locator
+const locator = localStorage.getItem("locator");
+document.getElementById("displayLocator").innerHTML = locator;
+document.getElementById("locatorInput").value = locator;
+
+
+
 
 
 let spotList = "<ul class='list-group'>";
@@ -30,9 +37,14 @@ fetch('https://api.pota.app/spot/activator')
 });
 
 
-function saveStatioSettings()
+function saveStationSettings()
 {
+    // Callsign 
     let callSign = document.getElementById("callsignInput").value;
     localStorage.setItem("callSign", callSign);
-    document.getElementById("displyCallSign").innerHTML = callSign;
+    document.getElementById("displayCallSign").innerHTML = callSign;
+    // Locator
+    let locator = document.getElementById("locatorInput").value;
+    localStorage.setItem("locator", locator);
+    document.getElementById("displayLocator").innerHTML = locator;
 }
