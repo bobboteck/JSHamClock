@@ -27,10 +27,16 @@
     <div class="container-fluid min-vh-100" style="background-color: #0f0;">
         <div class="row align-items-start">
             <div class="col">
-                Station
-                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#stationSettings">
-                    <i class="bi bi-sliders"></i>
-                </button>
+                <div class="row">
+                    <div class="col-10 align-items-end">
+                        <h6 class="pt-2">Station</h6>
+                    </div>
+                    <div class="col-2 text-end pt-1 pb-1">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#stationSettings">
+                            <i class="bi bi-sliders"></i>
+                        </button>
+                    </div>
+                </div>
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <div class="row align-items-start">
@@ -38,7 +44,6 @@
                                 <h1 class="card-title" id="displayCallSign"></h1>
                             </div>
                             <div class="col">
-
                             </div>
                         </div>
                         <h6 class="card-subtitle mb-2 text-body-secondary" id="displayLocator"></h6>
@@ -48,10 +53,16 @@
                 </div>
             </div>
             <div class="col">
-                SOTA
-                <button type="button" class="btn btn-outline-secondary">
-                    <i class="bi bi-sliders"></i>
-                </button>
+                <div class="row">
+                    <div class="col-10 align-items-end">
+                        <h6 class="pt-2">SOTA</h6>
+                    </div>
+                    <div class="col-2 text-end pt-1 pb-1">
+                        <button type="button" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-sliders"></i>
+                        </button>
+                    </div>
+                </div>
                 <span id="sotaSpot">
                     <ul class='list-group'>
                         <li class='list-group-item'>...</li>
@@ -63,10 +74,16 @@
                 </span>
             </div>
             <div class="col">
-                POTA
-                <button type="button" class="btn btn-outline-secondary">
-                    <i class="bi bi-sliders"></i>
-                </button>
+                <div class="row">
+                    <div class="col-10 align-items-end">
+                        <h6 class="pt-2">POTA</h6>
+                    </div>
+                    <div class="col-2 text-end pt-1 pb-1">
+                        <button type="button" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-sliders"></i>
+                        </button>
+                    </div>
+                </div>
                 <span id="potaSpot"></span>
             </div>
         </div>
