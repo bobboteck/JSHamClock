@@ -15,6 +15,8 @@ document.getElementById("latitudeInput").value = latitude;
 const longitude = localStorage.getItem("longitude") === null ? 41.88 : localStorage.getItem("longitude");
 document.getElementById("longitudeInput").value = longitude;
 
+updateClock();
+
 // Map
 let map = L.map('mapContainer').setView([longitude, latitude], 2);
 let Stamen_Terrain = L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', 
@@ -68,4 +70,23 @@ function saveStationSettings()
     let locator = document.getElementById("locatorInput").value;
     localStorage.setItem("locator", locator);
     document.getElementById("displayLocator").innerHTML = locator;
+}
+
+
+
+function updateClock()
+{
+    const localDate = new Date();
+    const nHours = localDate.getHours();
+    const nMinutes = localDate.getMinutes();
+    const nSeconds = localDate.getSeconds();
+    const sMinutes = nMinutes < 10 ? "0" + nMinutes : nMinutes;
+    const sSeconds = nSeconds < 10 ? "0" + nSeconds : nSeconds;
+
+    const nUtcHours = localDate.getUTCHours();
+
+    document.getElementById('localTime').innerHTML =  nHours + ":" + sMinutes + ":" + sSeconds;
+    document.getElementById('utcTime').innerHTML =  nUtcHours + ":" + sMinutes + ":" + sSeconds;
+    
+    setTimeout(updateClock, 1000);
 }

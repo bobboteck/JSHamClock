@@ -28,26 +28,22 @@
         <div class="row align-items-start">
             <div class="col">
                 Station
-                <div class="container">
-                    <div class="row align-items-start">
-                        <div class="col">
-                            <div class="card" style="width: 18rem;">
-                                <div class="card-body">
-                                    <div class="row align-items-start">
-                                        <div class="col">
-                                            <h1 class="card-title" id="displayCallSign"></h1>
-                                        </div>
-                                        <div class="col">
-                                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#stationSettings">
-                                                <i class="bi bi-sliders"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <h6 class="card-subtitle mb-2 text-body-secondary" id="displayLocator"></h6>
-                                    <h1>18:14:22</h1>
-                                </div>
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#stationSettings">
+                    <i class="bi bi-sliders"></i>
+                </button>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <div class="row align-items-start">
+                            <div class="col">
+                                <h1 class="card-title" id="displayCallSign"></h1>
+                            </div>
+                            <div class="col">
+
                             </div>
                         </div>
+                        <h6 class="card-subtitle mb-2 text-body-secondary" id="displayLocator"></h6>
+                        <h1 id="utcTime"></h1>
+                        <p id="localTime"></p>
                     </div>
                 </div>
             </div>
