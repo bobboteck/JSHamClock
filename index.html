@@ -79,7 +79,7 @@
                         <h6 class="pt-2">POTA</h6>
                     </div>
                     <div class="col-2 text-end pt-1 pb-1">
-                        <button type="button" class="btn btn-outline-secondary btn-sm">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#potaSettings">
                             <i class="bi bi-sliders"></i>
                         </button>
                     </div>
@@ -97,34 +97,61 @@
     <!-- Modal Station settings -->
     <div class="modal fade" id="stationSettings" tabindex="-1" aria-labelledby="stationSettingsLabel" aria-hidden="true">
         <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="stationSettingsLabel">Station settings</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="callsignInput" class="form-label">Call sign</label>
-                    <input type="text" class="form-control" id="callsignInput" placeholder="Enter your call sign ...">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="stationSettingsLabel">Station settings</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="mb-3">
-                    <label for="locatorInput" class="form-label">Locator</label>
-                    <input type="text" class="form-control" id="locatorInput" placeholder="Enter your locator ...">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="callsignInput" class="form-label">Call sign</label>
+                        <input type="text" class="form-control" id="callsignInput" placeholder="Enter your call sign ...">
+                    </div>
+                    <div class="mb-3">
+                        <label for="locatorInput" class="form-label">Locator</label>
+                        <input type="text" class="form-control" id="locatorInput" placeholder="Enter your locator ...">
+                    </div>
+                    <div class="mb-3">
+                        <label for="latitudeInput" class="form-label">Latitude</label>
+                        <input type="text" class="form-control" id="latitudeInput" placeholder="Enter your latitude ...">
+                    </div>
+                    <div class="mb-3">
+                        <label for="longitudeInput" class="form-label">Longitude</label>
+                        <input type="text" class="form-control" id="longitudeInput" placeholder="Enter your longitude ...">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="latitudeInput" class="form-label">Latitude</label>
-                    <input type="text" class="form-control" id="latitudeInput" placeholder="Enter your latitude ...">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="saveStationSettings()">Save changes</button>
                 </div>
-                <div class="mb-3">
-                    <label for="longitudeInput" class="form-label">Longitude</label>
-                    <input type="text" class="form-control" id="longitudeInput" placeholder="Enter your longitude ...">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="saveStationSettings()">Save changes</button>
             </div>
         </div>
+    </div>
+
+    <!-- Modal POTA settings -->
+    <div class="modal fade" id="potaSettings" tabindex="-1" aria-labelledby="potaSettingsLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="potaSettingsLabel">POTA settings</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="callsignInput" class="form-label">Refresh interval</label>
+                        <select class="form-select" aria-label="Default select example" id="potaInterval">
+                            <option selected>Select minutes</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="savePotaSettings()">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 

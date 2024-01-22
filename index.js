@@ -14,8 +14,8 @@ document.getElementById("latitudeInput").value = latitude;
 // Longitude
 const longitude = localStorage.getItem("longitude") === null ? 41.88 : localStorage.getItem("longitude");
 document.getElementById("longitudeInput").value = longitude;
-
-updateClock();
+// POTA Interval
+const potaInterval = localStorage.getItem("potaInterval") === null ? 41.88 : localStorage.getItem("potaInterval");
 
 // Map
 let map = L.map('mapContainer').setView([longitude, latitude], 2);
@@ -30,34 +30,8 @@ let Stamen_Terrain = L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png'
 let myPosition = L.marker([longitude, latitude]).addTo(map).bindPopup(currentCallSign);
 
 
-// POTA Spots
-let spotList = "<ul class='list-group'>";
-
-fetch('https://api.pota.app/spot/activator')
-.then(response => 
-{
-    return response.json();
-})
-.then(jsonData =>
-{
-    let index = 0;
-
-    jsonData.forEach(spot =>
-    {
-        if(index < 5)
-        {
-            spotList += "<li class='list-group-item'>" + spot.activator + " Freq: " + spot.frequency + " [" + spot.mode + "] Ref: " + spot.reference + "</li>";
-            // Add POTA marker on map
-            L.marker([spot.latitude, spot.longitude], {icon: potaIcon}).addTo(map).bindPopup(spot.activator);
-
-            index++;
-        }
-    });
-
-    spotList += "</ul>";
-
-    document.getElementById("potaSpot").innerHTML = spotList;
-});
+updateClock();
+updatePota();
 
 
 function saveStationSettings()
@@ -72,6 +46,47 @@ function saveStationSettings()
     document.getElementById("displayLocator").innerHTML = locator;
 }
 
+function savePotaSettings()
+{
+    var e = document.getElementById("potaInterval");
+    var value = e.value;
+    localStorage.setItem("potaInterval", value);
+}
+
+
+function updatePota()
+{
+    // POTA Spots
+    let spotList = "<ul class='list-group'>";
+
+    fetch('https://api.pota.app/spot/activator')
+    .then(response => 
+    {
+        return response.json();
+    })
+    .then(jsonData =>
+    {
+        let index = 0;
+
+        jsonData.forEach(spot =>
+        {
+            if(index < 5)
+            {
+                spotList += "<li class='list-group-item'>" + spot.activator + " Freq: " + spot.frequency + " [" + spot.mode + "] Ref: " + spot.reference + "</li>";
+                // Add POTA marker on map
+                L.marker([spot.latitude, spot.longitude], {icon: potaIcon}).addTo(map).bindPopup(spot.activator);
+
+                index++;
+            }
+        });
+
+        spotList += "</ul>";
+
+        document.getElementById("potaSpot").innerHTML = spotList;
+    });
+
+    setTimeout(updatePota, potaInterval * 1000);
+}
 
 
 function updateClock()
