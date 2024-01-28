@@ -16,6 +16,8 @@ const longitude = localStorage.getItem("longitude") === null ? 41.88 : localStor
 document.getElementById("longitudeInput").value = longitude;
 // POTA Interval
 const potaInterval = localStorage.getItem("potaInterval") === null ? 41.88 : localStorage.getItem("potaInterval");
+document.getElementById("potaInterval").value = potaInterval;
+
 
 // Map
 let map = L.map('mapContainer').setView([longitude, latitude], 2);
