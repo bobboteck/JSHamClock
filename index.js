@@ -1,4 +1,5 @@
 const potaIcon = L.icon({ iconUrl: 'images/marker-pota.png', iconSize: [26,41], iconAnchor: [12,40], popupAnchor: [0,-30] });
+const modeAll = ["FM","SSB","CW","FT4","FT8"];
 
 // Callsign
 const currentCallSign = localStorage.getItem("callSign");
@@ -15,8 +16,18 @@ document.getElementById("latitudeInput").value = latitude;
 const longitude = localStorage.getItem("longitude") === null ? 41.88 : localStorage.getItem("longitude");
 document.getElementById("longitudeInput").value = longitude;
 // POTA Interval
-const potaInterval = localStorage.getItem("potaInterval") === null ? 41.88 : localStorage.getItem("potaInterval");
+const potaInterval = localStorage.getItem("potaInterval") === null ? 3 : localStorage.getItem("potaInterval");
 document.getElementById("potaInterval").value = potaInterval;
+// POTA Mode Filter - get saved filte
+const potaModeFilter = localStorage.getItem("potaModeFilter") === null ? "" : localStorage.getItem("potaModeFilter");
+// POTA Mode Filter - check saved filter
+modeAll.forEach(mode =>
+{
+    if(potaModeFilter.indexOf(mode) !== -1)
+    {
+        document.getElementById("mode"+mode).checked = true;
+    }
+});
 
 
 // Map
@@ -33,7 +44,7 @@ let myPosition = L.marker([longitude, latitude]).addTo(map).bindPopup(currentCal
 
 
 updateClock();
-updatePota();
+updatePota(true);
 
 
 function saveStationSettings()
@@ -50,13 +61,31 @@ function saveStationSettings()
 
 function savePotaSettings()
 {
-    var e = document.getElementById("potaInterval");
-    var value = e.value;
-    localStorage.setItem("potaInterval", value);
+    const currentPotaInterval = localStorage.getItem("potaInterval") === null ? 3 : localStorage.getItem("potaInterval");
+    // Save timeout value of minutes refresh interval
+    const potaIntToSave = document.getElementById("potaInterval").value;
+    localStorage.setItem("potaInterval", potaIntToSave);
+    // Save mode to be filtered on data received
+    let modeToBeFilter = [];
+    // Loop for possible filter
+    modeAll.forEach(mode =>
+    {
+        if(document.getElementById("mode"+mode).checked)
+        {
+            modeToBeFilter.push(mode);
+        }
+    });
+    // Save data on local storage
+    localStorage.setItem("potaModeFilter", modeToBeFilter);
+
+    if(currentPotaInterval !== potaIntToSave)
+    {
+        location.reload();
+    }
 }
 
 
-function updatePota()
+function updatePota(setRefreshInterval = true)
 {
     // POTA Spots
     let spotList = "<ul class='list-group'>";
@@ -71,8 +100,12 @@ function updatePota()
         let index = 0;
         // Order data by spotId
         jsonData.sort((a, b) => b.spotId - a.spotId);
+        // Filter on desired bands
+        const potaSpotsModeFiltered = jsonData.filter((potaSpot) => potaSpot.mode !== "" && potaModeFilter.indexOf(potaSpot.mode) >= 0);
+        console.log(potaSpotsModeFiltered);
+
         // Loop for each data in the json
-        jsonData.forEach(spot =>
+        potaSpotsModeFiltered.forEach(spot => 
         {
             if(index < 5)
             {
@@ -89,7 +122,12 @@ function updatePota()
         document.getElementById("potaSpot").innerHTML = spotList;
     });
 
-    setTimeout(updatePota, potaInterval * 60000);
+    console.log("POTA Updated:", new Date());
+
+    if(setRefreshInterval)
+    {
+        setTimeout(updatePota, potaInterval * 60000);
+    }
 }
 
 
