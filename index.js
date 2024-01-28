@@ -69,7 +69,9 @@ function updatePota()
     .then(jsonData =>
     {
         let index = 0;
-
+        // Order data by spotId
+        jsonData.sort((a, b) => b.spotId - a.spotId);
+        // Loop for each data in the json
         jsonData.forEach(spot =>
         {
             if(index < 5)
