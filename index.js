@@ -89,7 +89,7 @@ function updatePota()
         document.getElementById("potaSpot").innerHTML = spotList;
     });
 
-    setTimeout(updatePota, potaInterval * 1000);
+    setTimeout(updatePota, potaInterval * 60000);
 }
 
 
